@@ -1,0 +1,44 @@
+body, html {
+    background: #03a9f4;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+svg {
+    background: white;
+    .phase{
+        &.active rect, rect:hover {
+            stroke-width: .1em;
+            stroke: silver;
+        }
+        &.drag_begin {
+            cursor: w-resize;
+        }
+        &.drag_end {
+            cursor: e-resize;
+        }
+        cursor: ew-resize; 
+    }
+}
+
+.modal-box {
+    background:  rgba(173, 216, 230, 0.8);
+    position: absolute;
+    left: calc(50% - 9em);
+    width: 18em;
+    margin: 1em;
+    padding: .5em;
+    display: none;
+    label {
+        display: inline-flex;
+        width:100%;
+        span {
+            flex: 1
+        }
+        input, select {
+            flex: 2
+        }
+    }
+}

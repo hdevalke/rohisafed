@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "module": "es6",
+    "target": "es6",
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals" : false,
+    "noUnusedParameters" : false,
+    "noImplicitReturns": true,
+    "noErrorTruncation": true,
+    "noImplicitThis": true
+  }
+}

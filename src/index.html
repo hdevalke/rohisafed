@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div>
+        <input id="save_svg" type="button" value="save as svg">
+        <input id="save_png" type="button" value="save as png">
+        <input id="download" type="button" value="download">
+        <input id="upload" type="file">
+        <input id="add_project" type="button" value="add project">
+        <input id="add_phase" type="button" value="add phase">
+    </div>
+    <div id="project_form" class="modal-box">
+        <form name="add_project_form">
+            <label><span>Name:</span><input name="name" required placeholder="Project name"></label>
+            <label><span>Begin:</span><input name="begin" type="date" required/></label>
+            <label><span>End:</span><input name="end" type="date" required/></label>
+            <input type="submit" value="create project">
+            <input name="cancel" type="button" value="cancel">
+        </form>
+    </div>
+    <div id="phase_form" class="modal-box">
+        <form name="phase_form">
+            <label><span>Project</span><select name="project"></select></label>
+            <label><span>Name:</span><input name="name" placeholder="Optional phase name"></label>
+            <label><span>Begin:</span><input name="begin" type="date" required/></label><br>
+            <label><span>End:</span><input name="end" type="date" required/></label><br>
+            
+            <input type="submit" value="edit">
+            <input name="cancel" type="button" value="cancel">
+            <input name="delete" type="button" value="delete">
+        </form>
+    </div>
+</body>
+
+</html>

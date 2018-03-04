@@ -1,0 +1,12 @@
+*
+!.gitignore
+!/src
+!/src/*.html
+!/src/*.scss
+!/src/*.ts
+!package.json
+!tsconfig.json
+!tslint.json
+!webpack.*.js
+!README.md
+!LICENSE
