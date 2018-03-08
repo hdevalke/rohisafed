@@ -1,0 +1,37 @@
+body, html {
+  background: #03a9f4;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, sans-serif; }
+
+svg {
+  background: white; }
+  svg .phase {
+    cursor: ew-resize; }
+    svg .phase.active rect, svg .phase rect:hover {
+      stroke-width: .1em;
+      stroke: silver; }
+    svg .phase.drag_begin {
+      cursor: w-resize; }
+    svg .phase.drag_end {
+      cursor: e-resize; }
+
+.modal-box {
+  background: rgba(173, 216, 230, 0.8);
+  position: absolute;
+  left: calc(50% - 9em);
+  width: 18em;
+  margin: 1em;
+  padding: .5em;
+  display: none; }
+  .modal-box label {
+    display: inline-flex;
+    width: 100%; }
+    .modal-box label span {
+      flex: 1; }
+    .modal-box label input, .modal-box label select {
+      flex: 2; }
+
+
+/*# sourceMappingURL=style.css.map*/
