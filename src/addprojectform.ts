@@ -2,10 +2,11 @@ import { Action, FileService, IPhase, IProject } from "./file";
 import { IState } from "./state";
 import { Store } from "./store";
 
-export class ProjectForm {
+export class ProjectAddForm {
 
     private readonly name: HTMLInputElement;
     private readonly begin: HTMLInputElement;
+    private readonly color: HTMLInputElement;
     private readonly end: HTMLInputElement;
     private readonly cancel: HTMLInputElement;
 
@@ -16,6 +17,7 @@ export class ProjectForm {
         this.begin = form.elements.namedItem("begin") as HTMLInputElement;
         this.end = form.elements.namedItem("end") as HTMLInputElement;
         this.cancel = form.elements.namedItem("cancel") as HTMLInputElement;
+        this.color = form.elements.namedItem("color") as HTMLInputElement;
         form.onsubmit = this.onsubmit;
         this.cancel.onclick = (e) => {
             this.form.parentElement.style.display = "none";
@@ -33,7 +35,7 @@ export class ProjectForm {
             begin: this.begin.valueAsDate,
             end: this.end.valueAsDate,
         };
-        this.fileService.addProject(this.store.state.file, this.name.value, [phase]);
+        this.fileService.addProject(this.store.state.file, this.name.value, this.color.value, [phase]);
         this.form.parentElement.style.display = "none";
         this.clearValues();
         return false;

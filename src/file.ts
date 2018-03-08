@@ -8,11 +8,12 @@ export interface IPhase {
     end: Date;
     project: IProject;
 }
-
+type Color = string;
 export interface IProject {
     i: number;
     name: string;
     phases: IPhase[];
+    color: Color;
 }
 
 export interface IFile {
@@ -22,10 +23,17 @@ export interface IFile {
 export enum Action {
     FileOpened = "file_open",
     ProjectAdded = "project_add",
+    ProjectUpdated = "project_updated",
     ProjectDel = "project_del",
     PhaseAdded = "phase_add",
     PhaseDeleted = "phase_delete",
     PhaseUpdated = "phase_update",
+}
+
+interface INewPhase {
+    name?: string;
+    begin: Date;
+    end: Date;
 }
 
 export class FileService {
@@ -67,8 +75,9 @@ export class FileService {
         this.store.dispatchEvent(new CustomEvent(Action.PhaseDeleted, { detail: phase }));
     }
 
-    public addProject(file: IFile, name: string, phases?: Array<{ name?: string, begin: Date, end: Date }>) {
+    public addProject(file: IFile, name: string, color: Color, phases?: INewPhase[]) {
         const project: IProject = {
+            color,
             i: file.projects.length,
             name,
             phases: [],
@@ -84,6 +93,12 @@ export class FileService {
         }
         file.projects.push(project);
         this.store.dispatchEvent(new CustomEvent(Action.ProjectAdded, { detail: project }));
+    }
+
+    public editProject(project: IProject, name: string, color: Color) {
+        project.name = name;
+        project.color = color;
+        this.store.dispatchEvent(new CustomEvent(Action.ProjectUpdated, {detail: project}));
     }
 }
 

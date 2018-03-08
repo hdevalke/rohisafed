@@ -1,3 +1,4 @@
+import { ProjectEditForm } from "./editprojectform";
 import { Action, FileService, IFile, IPhase, IProject } from "./file";
 import { PhaseForm } from "./phaseform";
 import { Renderer } from "./render";
@@ -7,6 +8,7 @@ import { Store } from "./store";
 export class App {
     constructor(private readonly renderer: Renderer,
                 private readonly phaseForm: PhaseForm,
+                private readonly editProjectForm: ProjectEditForm,
                 private readonly fileService: FileService,
                 private readonly store: Store<IState>) {
     }
@@ -43,6 +45,10 @@ export class App {
         const addProjectButton: HTMLInputElement = document.querySelector("#add_project");
         addProjectButton.onclick = (e: Event) => {
             document.querySelector<HTMLDivElement>("#project_form").style.display = "block";
+        };
+        const editProjectButton: HTMLInputElement = document.querySelector("#edit_project");
+        editProjectButton.onclick = (e: Event) => {
+            this.editProjectForm.open();
         };
         const addPhaseButton: HTMLInputElement = document.querySelector("#add_phase");
         addPhaseButton.onclick = (e: Event) => {

@@ -13,7 +13,6 @@ export class Renderer {
 
     private xAxis: d3.Axis<Date>;
     private gXAxis: d3.Selection<d3.BaseType, {}, HTMLElement, any>;
-    private colorScale: d3.ScaleOrdinal<string, string>;
     private plotGroup: d3.Selection<d3.BaseType, {}, HTMLElement, any>;
     private phaseHeight: number;
     private dragPhaseOffsetX: number;
@@ -27,8 +26,7 @@ export class Renderer {
         top: 30,
     };
     constructor(private readonly store: Store<IState>, private readonly phaseForm: PhaseForm) {
-        this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-        this.phaseHeight = 20;
+        this.phaseHeight = 30;
     }
 
     public renderProject(project: IProject) {
@@ -54,7 +52,7 @@ export class Renderer {
             phaseGroup.append("rect")
                 .attr("width", this.phaseRectWidthAttr)
                 .attr("height", this.phaseHeight - 2)
-                .attr("fill", this.colorScale(phase.project.i.toString()));
+                .attr("fill", project.color);
             // text
             phaseGroup.append("text")
                 .text(this.phaseText)
@@ -74,10 +72,13 @@ export class Renderer {
         svg.append("style")
             .text(`
         .phase text {
-            fill: silver;
-            font-size: .8em;
+            fill: darkslategray;
+            font-size: 1.2em;
             font-family: sans-serif;
-          }
+        }
+        .axis {
+            font-size: 1.2em;
+        }
         `);
         const zoom = d3.zoom().on("zoom", this.zoomed);
         svg.call(zoom);
@@ -128,7 +129,7 @@ export class Renderer {
     }
 
     private generatePhaseId(phase: IPhase) {
-        return `${phase.project.name.replace(/\s/ig, "_")}_${phase.i}`;
+        return `${phase.project.name.replace(/[^a-z0-9_-]/ig, "_")}_${phase.i}`;
     }
 
     private phaseGroupAttr = (phase: IPhase) => {
