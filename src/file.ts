@@ -56,6 +56,7 @@ export class FileService {
             i: project.phases.length,
             project,
         };
+        project.phases.push(phase);
         this.store.dispatchEvent(new CustomEvent(Action.PhaseAdded, { detail: phase }));
     }
 

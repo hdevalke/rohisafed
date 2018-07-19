@@ -7,6 +7,7 @@ Try it on [hdevalke.github.io/rohisafed](https://hdevalke.github.io/rohisafed). 
 ## Build
 
 ```sh
+npm install
 npm run build
 ```
 

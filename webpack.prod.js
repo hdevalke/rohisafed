@@ -2,31 +2,20 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = merge(common, {
-    devtool: 'source-map',
+    mode: 'production',
     module: {
         rules: [
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true,
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: "sass-loader", options: {
-                            sourceMap: true
-                        }
-                    }]
-                })
+                use: [MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
         ]
     },
@@ -37,8 +26,8 @@ module.exports = merge(common, {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
-        new ExtractTextPlugin("style.css"),
-        new WorkboxPlugin({
+        new MiniCssExtractPlugin({ filename: "style.css"}),
+        new WorkboxPlugin.GenerateSW({
             // these options encourage the ServiceWorkers to get in there fast 
             // and not allow any straggling "old" SWs to hang around
             clientsClaim: true,
